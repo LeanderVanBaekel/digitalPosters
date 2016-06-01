@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  </head>
+  <body>
+    <header>
+      <h1><a href="">CMD Posters / new slide</a></h1>
+    </header>
+
+    <!-- <form action="">
+
+      <label for="tile">Title: </label>
+      <input type="text" id="title">
+
+      <label for="tile">Duration: </label>
+      <input type="number" id="title">
+
+      <input type="file" name="fileToUpload" id="fileToUpload">
+
+      <input type="submit" value="submit" name="submit">
+
+    </form> -->
+
+    <div style="border:1px solid black">
+    <h3>File Upload</h3>
+    <input type="file" id="fl"></input>
+    <br/>
+    <br/>
+    <input type="button" value="Validate" id="btn"/>
+    <br />
+    <video controls width="500px" id="vid" style="display:none"></video>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script type="text/ecmascript">
+    var objectUrl;
+    
+    // code from http://www.c-sharpcorner.com/blogs/validation-check-for-video-duration-on-client-side1
+    $("#fl").change(function(e){
+    var file = e.currentTarget.files[0];
+    objectUrl = URL.createObjectURL(file);
+    $("#vid").prop("src", objectUrl);
+    });
+
+    $('#btn').click(function(){
+    var seconds = $("#vid")[0].duration;
+    if(seconds <= 120)
+      alert('Video duration should be more than 2 min');
+
+    // alert("test");
+    });
+
+
+    </script>
+
+    <nav id="menu">
+      <a href="#menu"><button >▼ menu ▼</button></a>
+      <ul>
+        <li><a href="index.html">Slides</a></li>
+        <li><a href="slideshows.html">Slideshows</a></li>
+        <li><a href="/backend/screens">Screens</a></li>
+      </ul>
+    </nav>
+
+  </body>
+</html>

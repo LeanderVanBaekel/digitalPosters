@@ -1,4 +1,4 @@
-#DIGITALPOSTERS designbrief
+# DIGITALPOSTERS designbrief
 
 ## Inleiding
 
@@ -15,3 +15,16 @@ Iedereen die toegang krijgt tot de backend van het systeem. Dit zijn leraren en 
 
 ### Client
 Mattijs Blekemolen. Mattijs wil een prototype hebben die hij kan voorleggen bij de bestuur van de opleiding zodat hij de financiering kan krijgen voor de schermen. Het prototype moet bewijzen dat het idee haalbaar is en dat de gebruikers er gebruik van gaan maken.
+
+## The environment of the product
+De schermen gaan in de eerste instantie in de gang van het tth op de eerste verdieping hangen.
+
+## Problem
+
+## Design challenge
+
+## Product vision
+
+## Milestones
+
+## Roadmap
