@@ -1,0 +1,76 @@
+<%- include('partials/head')%>
+
+
+<a class="button selectType" href="#add-image">Image</a>
+<a class="button selectType" href="#add-video">Video</a>
+<a class="button selectType" href="#add-text">Text</a>
+
+
+
+<form class="add-content" id="add-text" action="add-slide" enctype="multipart/form-data" method="post">
+  <legend>Text slide</legend>
+
+  <input class="dis-none" value="text" name="contentType" type="text">
+
+  <label for="title">Title: </label>
+  <input type="text" name="title" id="title"><br>
+
+  <label for="duration">Duration: </label>
+  <input type="number" name="duration" id="duration"><br>
+
+  <label for="header">Header: </label>
+  <input type="text" name="header" id="header"><br>
+
+  <label for="sub-header">Sub header: </label>
+  <input type="text" name="subHeader" id="sub-header"><br>
+
+  <label for="main-text">Main text: </label><br>
+  <textarea type="textarea" name="mainText" id="main-text"></textarea><br>
+
+  <input type="file" name="fileToUpload" id="fileToUpload"><br>
+
+  <button class="button" type="submit" name="submit">SUBMIT</button>
+
+</form>
+
+
+<form class="add-content" id="add-image" action="add-slide" enctype="multipart/form-data" method="post">
+  <legend>Image slide</legend>
+
+  <input class="dis-none" value="image" name="contentType" type="text">
+
+  <label for="title">Title: </label>
+  <input type="text" name="title" id="title"><br>
+
+  <label for="duration">Duration: </label>
+  <input type="number" name="duration" id="duration"><br>
+
+  <input type="file" name="fileToUpload" id="fileToUpload"><br>
+
+  <button class="button" type="submit" name="submit">SUBMIT</button>
+
+</form>
+
+<form class="add-content" id="add-video" action="add-slide" method="post">
+  <legend>Video slide</legend>
+
+  <input class="dis-none" value="video" name="contentType" type="text">
+
+  <label for="title">Title: </label>
+  <input type="text" name="title" id="title"><br>
+
+  <label for="duration">Duration: </label>
+  <input type="number" name="duration" id="duration"><br>
+
+  <input type="file" name="fileToUpload" id="fileToUpload"><br>
+
+  <p>Or</p>
+
+  <label for="url">Url: </label>
+  <input type="text" name="url" id="url"><br>
+
+  <button class="button" type="submit" name="submit">SUBMIT</button>
+</form>
+
+<%- include('partials/backend-nav')%>
+<%- include('partials/foot')%>

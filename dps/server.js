@@ -4,8 +4,10 @@ var MongoClient = require('mongodb');
 var mongoose    = require('mongoose');
 var path        = require('path');
 var app         = express();
-
     http        = require('http').Server(app);
+var multer  = require('multer');
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
 
 mongoose.connect('mongodb://127.0.0.1:27017/dpserver');
 
@@ -30,15 +32,33 @@ app.use(function(req, res, next) {
 });
 app.use(express.static(__dirname + '/public'));
 
-app.get('/', function(req, res){
+
+app.use(session({
+  secret: 'heeel moeilijk wachtwoord', // CHANGE THIS!!!
+  store: new FileStore(),
+  saveUninitialized: true,
+  resave: false
+}));
+
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(multer({dest:'./uploads/'}).single('fileToUpload'));
+
+
+
+app.get('/', function(req, res, next){
+  if (req.session.username) {
     res.send("test");
+  } else {
+		res.redirect("/dps/login");
+	}
 });
 
 var sliderRouter = require('./routes/slider');
 app.use('/slider', sliderRouter);
 
-var backendRouter = require('./routes/backend');
-app.use('/backend', backendRouter);
+var dpsRouter = require('./routes/digitalPrintShop');
+app.use('/dps', dpsRouter);
 
 var port = process.env.PORT || 8080;        // set our port
 

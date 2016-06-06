@@ -9,6 +9,7 @@ var slides  = new Schema({
   status: Boolean, // true = active
   duration: Number,
   createdOn : Date,
+  endsOn: Date,
   createdBy : String
 
 });
