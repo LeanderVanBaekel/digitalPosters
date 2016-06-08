@@ -35,7 +35,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(session({
   secret: 'heeel moeilijk wachtwoord', // CHANGE THIS!!!
-  store: new FileStore(),
+  //store: new FileStore(),
   saveUninitialized: true,
   resave: false
 }));

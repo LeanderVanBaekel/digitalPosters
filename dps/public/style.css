@@ -27,7 +27,7 @@ header h1 {
 
 nav {
   position: fixed;
-  bottom: -7.2em;
+  bottom: -9.1em;
   text-align: center;
   width: 100%;
   background-color: #FFCC00;
@@ -84,7 +84,7 @@ a {
 
 .main-ul {
   width: 100%;
-  margin-bottom: 1.6em;
+  margin-bottom: 4.5em;
 }
 
 .main-ul > li {
@@ -103,7 +103,32 @@ a {
   box-sizing: border-box;
 }
 
+.li-title {
+  background-color: #FFCC00!important;
+}
+
+.li-title h2 {
+  margin-top: 0;
+  font-size: 1em;
+  font-weight: 500;
+  margin-bottom: 0;
+  padding: 0.5em 0;
+}
+
 .item-ul {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.item-ul li:first-of-type{
+  width: 4em;
+  height: 4em;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin-left: 0;
 }
 
 .item-ul > li {
@@ -112,9 +137,15 @@ a {
   margin: 0 0.5em;
 }
 
-.item-ul button {
+.title {
+  width: 11em;
+  text-align: left;
+}
+
+.item-ul .button {
   background-color: #FFCC00;
   border: none;
+  display: inline-block;
   font-size: 0.9em;
   padding: 0.2em;
   margin: 0.5em;
@@ -125,11 +156,6 @@ a {
   background-color: rgb(0,0,0);
   color:  #FFCC00;
 }*/
-
-
-img {
-  max-height: 4em;
-}
 
 
 .button {
@@ -235,6 +261,10 @@ img {
   height: auto;
   transform: translateX(0vw);
   transition: all 0.5s ease;
+}
+
+#duration {
+  width: 2em;
 }
 
 /*input {

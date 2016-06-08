@@ -1,11 +1,14 @@
 <%- include('partials/head')%>
 
-<form class="add-content" action="">
+<form class="add-content" action="add-slideshow" enctype="multipart/form-data" method="post">
 
   <label for="name">Name: </label>
-  <input type="text" id="name"> <br>
+  <input type="text" name="name" id="name"> <br>
 
-  <input class="button" type="submit" value="next" name="submit">
+  <!-- <label for="slides">Slides: </label> -->
+
+
+  <input class="button" type="submit" value="SUBMIT" name="submit">
 
 </form>
 
