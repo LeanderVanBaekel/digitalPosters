@@ -54,6 +54,7 @@
   max-width: 40em;
   xheight: 100vh;
   xmargin: 0 auto;
+  background-color: white;
 }
 
 .content-text p {

@@ -2,7 +2,7 @@ var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
 var slides  = new Schema({
-  id: Number,
+  sid: Number,
 	title: String,
 	contentType: String,
 	content: String,
