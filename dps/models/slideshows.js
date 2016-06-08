@@ -2,10 +2,10 @@ var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
 var slideShows  = new Schema({
-  id: Number,
-	title: String,
+  sid: Number,
+	name: String,
 	slides: [],
-  screens: [], // true = active
+  screens: [],
   createdOn : Date,
   createdBy : String
 

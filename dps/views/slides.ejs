@@ -2,38 +2,61 @@
 
 <a href="add-slide"><button class="button" id="addlide">NEW SLIDE</button></a>
 
+
+
 <ul class="main-ul">
-  <li>
-    <ul class="item-ul">
-      <li><img src="/images/poster2.jpg" alt="title"></li>
-      <li>ID: 2</li>
-      <li>Title: title</li>
-      <li>Duration: 5</li>
-      <li>Date upload: 30-5-2016 13:56:45</li>
-      <li><button id="edit">EDIT</button><button id="remove">REMOVE</button></li>
-    </ul>
-  </li>
-  <li>
-    <ul class="item-ul">
-      <li><img src="/images/poster1.png" alt="title"></li>
-      <li>ID: 3</li>
-      <li>Title: title</li>
-      <li>Duration: 5</li>
-      <li>Date upload: 30-5-2016 13:56:45</li>
-      <li><button id="edit">EDIT</button><button id="remove">REMOVE</button></li>
-    </ul>
-  </li>
-  <li>
-    <ul class="item-ul">
-      <li><img src="/images/poster2.jpg" alt="title"></li>
-      <li>ID: 4</li>
-      <li>Title: title</li>
-      <li>Duration: 5</li>
-      <li>Date upload: 30-5-2016 13:56:45</li>
-      <li><button id="edit">EDIT</button><button id="remove">REMOVE</button></li>
-    </ul>
-  </li>
+  <li class="li-title"><h2>image slides</h2></li>
+  <% data.slides.forEach(function(slide) { %>
+    <% if (slide.contentType == "image") {%>
+      <li>
+        <ul class="item-ul">
+          <!-- <li><img src="<%= slide.content %>" alt="title"></li> -->
+          <li style="background-image: url('<%= slide.content %>');"></li>
+          <li>SID: <%= slide.sid%></li>
+          <li class="title"><%= slide.title%></li>
+          <li>Duration: <%= slide.duration%></li>
+          <li>Date upload: <%= slide.createdOn.toLocaleDateString()%></li>
+          <li><a href="<%= 'slides/edit:' + slide.sid %>" class="button" id="edit">EDIT</a><a href="<%= 'slides/remove/' + slide.sid %>" class="button" id="remove">REMOVE</a></li>
+        </ul>
+      </li>
+    <% }; %>
+  <% }); %>
+  <li class="li-title"><h2>video slides</h2></li>
+  <% data.slides.forEach(function(slide) { %>
+    <% if (slide.contentType == "video") {%>
+      <li>
+        <ul class="item-ul">
+          <!-- <li><img src="<%= slide.content %>" alt="title"></li> -->
+          <li style="background-image: url('<%= slide.content %>');"></li>
+          <li>SID: <%= slide.sid%></li>
+          <li class="title"><%= slide.title%></li>
+          <li>Duration: <%= slide.duration%></li>
+          <li>Date upload: <%= slide.createdOn.toLocaleDateString()%></li>
+          <li><a href="<%= 'slides/edit:' + slide.sid %>" class="button" id="edit">EDIT</a><a href="<%= 'slides/remove/' + slide.sid %>" class="button" id="remove">REMOVE</a></li>
+        </ul>
+      </li>
+    <% }; %>
+  <% }); %>
+  <li class="li-title"><h2>text slides</h2></li>
+  <% data.slides.forEach(function(slide) { %>
+    <% if (slide.contentType == "text") {%>
+      <li>
+        <ul class="item-ul">
+          <!-- <li><img src="<%= slide.content %>" alt="title"></li> -->
+          <li style="background-image: url('<%= slide.content %>');"></li>
+          <li>SID: <%= slide.sid%></li>
+          <li class="title"><%= slide.title%></li>
+          <li>Duration: <%= slide.duration%></li>
+          <li>Date upload: <%= slide.createdOn.toLocaleDateString()%></li>
+          <li><a href="<%= 'slides/edit:' + slide.sid %>" class="button" id="edit">EDIT</a><a href="<%= 'slides/remove/' + slide.sid %>" class="button" id="remove">REMOVE</a></li>
+        </ul>
+      </li>
+    <% }; %>
+  <% }); %>
 </ul>
+
+
+
 
 <%- include('partials/backend-nav')%>
 <%- include('partials/foot')%>
