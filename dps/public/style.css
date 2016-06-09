@@ -27,11 +27,12 @@ header h1 {
 
 nav {
   position: fixed;
-  bottom: -9.1em;
+  bottom: -8.2em;
   text-align: center;
   width: 100%;
   background-color: #FFCC00;
   transition: all 0.5s ease;
+  /*margin-bottom: -9.2em;*/
 }
 
 #menu:target {

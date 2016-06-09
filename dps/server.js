@@ -60,6 +60,9 @@ app.use('/slider', sliderRouter);
 var dpsRouter = require('./routes/digitalPrintShop');
 app.use('/dps', dpsRouter);
 
+var screensRouter = require('./routes/screens');
+app.use('/dps/screens', screensRouter);
+
 var port = process.env.PORT || 8080;        // set our port
 
 // app.listen(port);
