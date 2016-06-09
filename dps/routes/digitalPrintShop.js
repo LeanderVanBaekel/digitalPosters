@@ -40,7 +40,7 @@ var users = [
 router.route('/')
 	.get(function(req, res, next) {
 		if (req.session.username) {
-			res.redirect("slides");
+			res.redirect("/dps/slides");
 		} else {
 			res.redirect("login");
 		}
@@ -69,14 +69,12 @@ router.route('/login')
 		for (var i = 0; i != users.length; i++) {
 			if (users[i].u == username && users[i].p == password) {
 				req.session.username = username;
-				res.redirect(req.baseUrl + '/slides');
+				res.redirect('slides');
 			}
 		}
 		if (!req.session.username) {
 			return res.redirect('login');
 		}
-
-		res.redirect('slides')
 	});
 
 
@@ -95,11 +93,11 @@ router.route('/slides')
 			var query = Slide.find().sort({date: -1});
 			query.exec(function(err, slideData){
 				if (err){
-								console.log(err);
-							}
-							data.slides = slideData;
+					return console.error(err);
+				}
+				data.slides = slideData;
 
-							res.render('./slides.ejs', {data: data});
+				res.render('./slides.ejs', {data: data});
 			});
 		} else {
 			res.redirect('login');
@@ -349,7 +347,7 @@ router.route('/add-slideshow')
 		}
 	});
 
-router.route('/edit-slideshow/:id')
+router.route('/edit-slideshow/:sid')
 	.get(function(req, res, next) {
 		if (req.session.username) {
 			var data = {};

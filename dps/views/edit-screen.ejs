@@ -1,0 +1,21 @@
+<%- include('partials/head')%>
+
+  <h2>current slideshow for screen: <%= data.screenData.name %></h2>
+  <p><%= data.currentSlideshow.name %></p>
+
+<ul class="main-ul">
+  <% data.slideshows.forEach(function(slideshow) { %>
+    <li>
+      <ul class="item-ul">
+        <li></li>
+        <li><%= slideshow.sid %></li>
+        <li><%= slideshow.name %></li>
+        <li><%= slideshow.slides %></li>
+        <li><a href="<%= '/dps/screens/edit/use/' + data.screenData.sid +'-'+ slideshow.sid %>" class="button" id="use">USE</a></li>
+      </ul>
+    </li>
+  <% }) %>
+</ul>
+
+  <%- include('partials/backend-nav')%>
+<%- include('partials/foot')%>
