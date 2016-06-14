@@ -22,7 +22,7 @@ var getData = {
     this.doReq();
   },
   doReq: function () {
-    console.log("dorequest");
+    // console.log("dorequest");
     this.url.then(
       function (reqData, xhr) {
         newData = reqData;
@@ -51,7 +51,7 @@ var createElement = {
 
 
   setTimeouts: function () {
-    console.log("settimeouts");
+    // console.log("settimeouts");
     disBlock = "dis-block";
     disNone = "dis-none";
     var video;
@@ -59,7 +59,7 @@ var createElement = {
     var slides = document.querySelectorAll('.slide');
 
     var changeSlide = function () {
-      console.log("changeslide");
+      // console.log("changeslide");
 
       if (video) {
         video.pause();
@@ -102,7 +102,7 @@ var createElement = {
     }
 
     var refresh = function () {
-      console.log("refresh");
+      // console.log("refresh");
       getData.getScreenId();
     }
 
@@ -112,7 +112,7 @@ var createElement = {
   },
 
   addToDom: function () {
-    console.log("addtodom");
+    // console.log("addtodom");
     var slideFrame = document.querySelector('.slider');
     htmlData.forEach(function(data) {
       slideFrame.appendChild(data.html);
@@ -121,7 +121,7 @@ var createElement = {
   },
 
   createSlides: function () {
-    console.log("createslides");
+    // console.log("createslides");
     htmlData = [];
     data.slides.forEach(function(slide){
       if (slide.contentType == "image") {
