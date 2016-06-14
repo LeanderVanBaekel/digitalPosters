@@ -6,8 +6,6 @@ var url 				= 'mongodb://127.0.0.1:27017/dpserver';
 var mongoose   	= require('mongoose');
 var Slides 			= require('../models/slides.js');
 
-var io 					= require('socket.io')(http);
-
 mongoose.createConnection(url);
 
 var slidesData = [

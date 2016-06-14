@@ -44,7 +44,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(multer({dest:'./uploads/'}).single('fileToUpload'));
 
-
+// get url id to add screen data and slideshow
 
 app.get('/', function(req, res, next){
   if (req.session.username) {
@@ -56,6 +56,9 @@ app.get('/', function(req, res, next){
 
 var sliderRouter = require('./routes/slider');
 app.use('/slider', sliderRouter);
+
+var dpfRouter = require('./routes/digitalPosterFrame');
+app.use('/dpf', dpfRouter);
 
 var dpsRouter = require('./routes/digitalPrintShop');
 app.use('/dps', dpsRouter);

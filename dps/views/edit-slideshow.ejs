@@ -1,0 +1,20 @@
+<%- include('partials/head')%>
+
+<form class="add-content" action="/dps/slideshows/edit/<%= data.sid %>" method="post">
+
+  <label for="name">Name: </label>
+  <input type="text" name="name" value="<%= data.slideshow.name%>" id="name" disabled="true"> <br>
+
+  <label for="slides">Slides: </label>
+  <input type="text" name="slides" value="<%= data.slideshow.slides%>" id="slides"> <br>
+
+
+  <!-- <label for="slides">Slides: </label> -->
+
+
+  <input class="button" type="submit" value="SUBMIT" name="submit">
+
+</form>
+
+  <%- include('partials/backend-nav')%>
+<%- include('partials/foot')%>
