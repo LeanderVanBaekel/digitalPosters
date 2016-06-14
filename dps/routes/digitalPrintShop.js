@@ -20,19 +20,7 @@ var users = [
 		"p": "123"
 	},
 	{
-		"u": "daan",
-		"p": "123"
-	},
-	{
-		"u": "rogier",
-		"p": "123"
-	},
-	{
-		"u": "robin",
-		"p": "123"
-	},
-	{
-		"u": "eric",
+		"u": "matthijs",
 		"p": "123"
 	}
 ];
@@ -73,7 +61,7 @@ router.route('/login')
 			}
 		}
 		if (!req.session.username) {
-			return res.redirect('login');
+			return res.redirect('/dps/login');
 		}
 	});
 
@@ -100,7 +88,7 @@ router.route('/slides')
 				res.render('./slides.ejs', {data: data});
 			});
 		} else {
-			res.redirect('login');
+			res.redirect('/dps/login');
 		}
 	});
 
@@ -118,7 +106,7 @@ router.route('/slides/remove/:sid')
 					res.redirect('/dps/slides');
 				});
 		} else {
-			res.redirect('login');
+			res.redirect('/dps/login');
 		}
 	});
 
@@ -134,7 +122,7 @@ router.route('/add-slide')
 			console.log('go to /add-slide');
 			res.render('./add-slide.ejs', {data: data});
 		} else {
-			res.redirect('login');
+			res.redirect('/dps/login');
 		}
 	});
 
@@ -153,8 +141,6 @@ router.route('/add-slide', multer({ dest: './uploads/'}).single('fileToUpload'))
 					newSlide.content = req.body.content;
 					newSlide.title = req.body.title;
 					if (newSlide.title == "") {
-						console.log('runnin');
-						console.log(newId.toString());
 						newSlide.title = newId.toString();
 					}
 					newSlide.sid = newId;
@@ -162,13 +148,18 @@ router.route('/add-slide', multer({ dest: './uploads/'}).single('fileToUpload'))
 					if (req.body.contentType == "text") {
 						newSlide.content = "<h1>"+req.body.header+"</h1>"+"<h2>"+req.body.subHeader+"</h2>"+"<p>"+req.body.mainText+"</p>";
 					} else if (req.body.contentType == "video") {
-
+						var video = req.file;
+						console.log(req);
+						if (video) {
+							var extension = req.file.originalname.split(".");
+							extension = extension[(extension.length -1)];
+							fs.renameSync("./"+ video.path, "public/videos/" + newSlide.sid + "." + extension);
+							newSlide.content = "/videos/" + newSlide.sid + "." + extension;
+						}
 					} else if (req.body.contentType == "image") {
 
 						var image = req.file;
-
-
-
+						console.log(req);
 						if (image) {
 							var extension = req.file.originalname.split(".");
 							extension = extension[(extension.length -1)];
@@ -214,7 +205,7 @@ router.route('/add-slide', multer({ dest: './uploads/'}).single('fileToUpload'))
 			createSlide.getNewId();
 
 		} else {
-			res.redirect('login');
+			res.redirect('/dps/login');
 		}
 	});
 
@@ -225,7 +216,7 @@ router.route('/edit-slide/:id')
 			console.log('go to /edit-slide');
 			res.render('./edit-slide', {data:data});
 		} else {
-			res.redirect('login');
+			res.redirect('/dps/login');
 		}
 	});
 
@@ -250,7 +241,7 @@ router.route('/slideshows')
 							res.render('./slideshows.ejs', {data: data});
 			});
 		} else {
-			res.redirect('login');
+			res.redirect('/dps/login');
 		}
 	});
 
@@ -282,7 +273,7 @@ router.route('/add-slideshow')
 			console.log('go to /add-slideshow');
 			res.render('./add-slideshow.ejs', {data: data});
 		} else {
-			res.redirect('login');
+			res.redirect('/dps/login');
 		}
 	});
 
@@ -343,19 +334,43 @@ router.route('/add-slideshow')
 			createSlideshow.getNewId();
 
 		} else {
-			res.redirect('login');
+			res.redirect('/dps/login');
 		}
 	});
 
-router.route('/edit-slideshow/:sid')
+router.route('/slideshows/edit/:sid')
 	.get(function(req, res, next) {
+		console.log('go to /edit-slideshow');
 		if (req.session.username) {
-			var data = {};
-			console.log('go to /edit-slideshow');
-			res.render('./edit-slideshow', {data:data});
+			var data = {
+				sid: req.params.sid
+			};
+
+			Slideshow.findOne({sid: data.sid}, function(err, slideshow) {
+				data.slideshow = slideshow;
+				res.render('./edit-slideshow', {data:data});
+			});
+
 		} else {
-			res.redirect('login');
+			res.redirect('/dps/login');
 		}
+	});
+
+router.route('/slideshows/edit/:sid')
+	.post(function(req, res, next) {
+		console.log("post edit slideshow");
+
+		var data = {
+			sid: req.params.sid,
+		};
+
+		data.slides = req.body.slides.split(',');
+
+		console.log(data.slides);
+
+		Slideshow.update({sid:data.sid}, {$set: {slides: data.slides}}, function(err){
+			return res.redirect('/dps/slideshows');
+		});
 	});
 
 router.route('/logout')
@@ -364,10 +379,10 @@ router.route('/logout')
 			req.session.destroy(function (err) {
 				console.log(err);
 
-				res.redirect('login');
+				res.redirect('/dps/login');
 			});
 		} else {
-			res.redirect('login');
+			res.redirect('/dps/login');
 		}
 	});
 
@@ -377,7 +392,7 @@ router.route('/logout')
 // 		 if (req.session.username) {
 // 		 	console.log(err);
 // 	 } else {
-// 		 res.redirect('login');
+// 		 res.redirect('/dps/login');
 // 	 }
 // })
 
