@@ -9,7 +9,7 @@ var curSlide = 0;
 var oldSlide = null;
 
 var getData = {
-  baseUrl: 'http://178.62.236.218:8080/dpf/api',
+  baseUrl: 'http://178.62.236.218:8080/dpf/api/',
   url: '',
   screenId: 0,
   getScreenId: function () {
