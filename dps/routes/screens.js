@@ -35,7 +35,7 @@ router.route('/')
 						screen.location = "TTH1";
 						screen.name = "scherm 1";
 						screen.createdBy = "leander";
-						screen.createdOn = new date();
+						screen.createdOn = new Date();
 
 						screen.save(function(err) {
             	if (err)
