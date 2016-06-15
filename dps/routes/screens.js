@@ -27,7 +27,7 @@ router.route('/')
 				if (err) {return console.error(err);}
 				if (screenData) {
 					data.screens = screenData;
-					if (!data.screens) {
+					if (!data.screens[1]) {
 						var screen = Screen()
 
 						screen.sid = 1;
