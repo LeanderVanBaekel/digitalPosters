@@ -27,7 +27,23 @@ router.route('/')
 				if (err) {return console.error(err);}
 				if (screenData) {
 					data.screens = screenData;
+					if (!data.screens) {
+						var screen = Screen()
+
+						screen.sid = 1;
+						screen.slideshow = 5;
+						screen.location = "TTH1";
+						screen.name = "scherm 1";
+						screen.createdBy = "leander";
+						screen.createdOn = new date();
+
+						screen.save(function(err) {
+            	if (err)
+              	res.send(err);
+	        	});
+					}
 				}
+
 
 				// else {
 				// 	console.log('runnin');

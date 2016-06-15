@@ -9,7 +9,7 @@ var curSlide = 0;
 var oldSlide = null;
 
 var getData = {
-  baseUrl: 'http://localhost:8080/dpf/api/',
+  baseUrl: 'http://screens.leandervanbaekel.nl/dpf/api/',
   url: '',
   screenId: 0,
   getScreenId: function () {
