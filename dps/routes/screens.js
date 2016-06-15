@@ -27,8 +27,8 @@ router.route('/')
 				if (err) {return console.error(err);}
 				if (screenData) {
 					data.screens = screenData;
-					if (!data.screens) {
-						var screen = Screen()
+					if (!data.screens[1]) {
+						var screen = Screen();
 
 						screen.sid = 1;
 						screen.slideshow = 5;
