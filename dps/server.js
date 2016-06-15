@@ -54,8 +54,8 @@ app.get('/', function(req, res, next){
 	}
 });
 
-var sliderRouter = require('./routes/slider');
-app.use('/slider', sliderRouter);
+// var sliderRouter = require('./routes/slider');
+// app.use('/slider', sliderRouter);
 
 var dpfRouter = require('./routes/digitalPosterFrame');
 app.use('/dpf', dpfRouter);
@@ -65,6 +65,9 @@ app.use('/dps', dpsRouter);
 
 var screensRouter = require('./routes/screens');
 app.use('/dps/screens', screensRouter);
+
+var dpsSlideshowsRouter = require('./routes/dpsSlideshows');
+app.use('/dps/slideshows', dpsSlideshowsRouter);
 
 var port = process.env.PORT || 8080;        // set our port
 
