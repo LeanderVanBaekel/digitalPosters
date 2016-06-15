@@ -25,6 +25,7 @@ var getData = {
     console.log("dorequest");
     this.url.then(
       function (reqData, xhr) {
+        console.log(reqData);
         newData = reqData;
         if (newData == data) {
           return;
