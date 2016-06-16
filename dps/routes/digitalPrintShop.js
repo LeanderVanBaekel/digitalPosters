@@ -28,16 +28,19 @@ var users = [
 router.route('/')
 	.get(function(req, res, next) {
 		if (req.session.username) {
-			res.redirect("/dps/slides");
+			var data = {
+				title: "home"
+			}
+			res.render("home.ejs", {data: data});
 		} else {
-			res.redirect("login");
+			res.redirect("/dps/login");
 		}
 	});
 
 router.route('/login')
 	.get(function(req, res, next) {
 		if (req.session.username) {
-			res.redirect("slides");
+			res.redirect("/dps/");
 		} else {
 			var data = {
 				req: req,
@@ -57,7 +60,7 @@ router.route('/login')
 		for (var i = 0; i != users.length; i++) {
 			if (users[i].u == username && users[i].p == password) {
 				req.session.username = username;
-				res.redirect('slides');
+				res.redirect('/dps/');
 			}
 		}
 		if (!req.session.username) {

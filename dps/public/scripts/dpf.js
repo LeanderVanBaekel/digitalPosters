@@ -173,7 +173,7 @@ var createElement = {
     innerContainer.setAttribute('class', 'content-text');
 
     var newText = document.createElement("div");
-    newText.setAttribute('src', slide.content);
+    newText.innerHTML= slide.content;
 
     innerContainer.appendChild(newText);
     container.appendChild(innerContainer);
