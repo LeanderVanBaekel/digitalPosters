@@ -63,7 +63,7 @@ app.use('/dpf', dpfRouter);
 var dpsRouter = require('./routes/digitalPrintShop');
 app.use('/dps', dpsRouter);
 
-var screensRouter = require('./routes/screens');
+var screensRouter = require('./routes/dpsScreens');
 app.use('/dps/screens', screensRouter);
 
 var dpsSlideshowsRouter = require('./routes/dpsSlideshows');

@@ -1,15 +1,26 @@
+// SCRIPT TO LOAD AND SLIDE THE slides
+
+// Micro lib to send ajax requests
+
 function pegasus(a,b){return b=new XMLHttpRequest,b.open("GET",a),a=[],b.onreadystatechange=b.then=function(c,d,e,f){if(c&&c.call&&(a=[,c,d]),4==b.readyState&&(e=a[0|b.status/200])){try{f=JSON.parse(b.responseText)}catch(g){f=null}e(f,b)}},b.send(),b}
-
-
-// var request = pegasus('http://localhost:8080/dpf/api/1');
 
 var newData = {};
 var data = {};
-var curSlide = 0;
-var oldSlide = null;
+var htmlData = [];
+// var curSlide = 0;
+// var oldSlide = null;
 
+var refresh = function () {
+  console.log("refresh");
+  getData.getScreenId();
+}
+
+// window.setInterval(refresh, 60000);
+
+// object to create url and send requests
 var getData = {
-  baseUrl: 'http://178.62.236.218:8080/dpf/api/',
+  // baseUrl: 'http://localhost:8080/dpf/api/', // local test
+  baseUrl: 'http://146.185.182.221/dpf/api/',
   url: '',
   screenId: 0,
   getScreenId: function () {
@@ -44,81 +55,70 @@ var getData = {
   }
 };
 
-var htmlData = [];
+var setTimeouts = function () {
+  console.log("settimeouts");
+  disBlock = "dis-block";
+  disNone = "dis-none";
+  var video;
+  var curSlide = 0;
+  var oldSlide = null;
+
+  var slides = document.querySelectorAll('.slide');
+
+  var changeSlide = function () {
+    console.log("changeslide");
+
+    if (video) {
+      video.pause();
+      video = undefined;
+    }
+
+
+    slides[curSlide].classList.remove(disNone);
+    slides[curSlide].classList.add(disBlock);
+
+    if (htmlData[curSlide].contentType == "video") {
+      video = slides[curSlide].querySelector('video');
+      video.currentTime = 0;
+      video.play();
+    }
+
+    if (oldSlide != null) {
+      slides[oldSlide].classList.remove(disBlock);
+      slides[oldSlide].classList.add(disNone);
+    }
+    oldSlide = curSlide;
+    curSlide ++;
 
 
 
+    var duration = htmlData[oldSlide].duration * 1000;
+
+    if (curSlide == slides.length) {
+      curSlide = 0;
+    }
+
+    window.setTimeout(changeSlide, duration);
+  };
+
+  if (slides.length == 1) {
+    slides[curSlide].classList.remove(disNone);
+    slides[curSlide].classList.add(disBlock);
+  } else {
+    changeSlide();
+  }
+
+}
+
+// Create slides from api data.
 var createElement = {
-
-
-  setTimeouts: function () {
-    console.log("settimeouts");
-    disBlock = "dis-block";
-    disNone = "dis-none";
-    var video;
-
-    var slides = document.querySelectorAll('.slide');
-
-    var changeSlide = function () {
-      console.log("changeslide");
-
-      if (video) {
-        video.pause();
-        video = undefined;
-      }
-
-
-      slides[curSlide].classList.remove(disNone);
-      slides[curSlide].classList.add(disBlock);
-
-      if (htmlData[curSlide].contentType == "video") {
-        video = slides[curSlide].querySelector('video');
-        video.currentTime = 0;
-        video.play();
-      }
-
-      if (oldSlide != null) {
-        slides[oldSlide].classList.remove(disBlock);
-        slides[oldSlide].classList.add(disNone);
-      }
-      oldSlide = curSlide;
-      curSlide ++;
-
-
-
-      var duration = htmlData[oldSlide].duration * 1000;
-
-      if (curSlide == slides.length) {
-        curSlide = 0;
-      }
-
-      window.setTimeout(changeSlide, duration);
-    };
-
-    if (slides.length == 1) {
-      slides[curSlide].classList.remove(disNone);
-      slides[curSlide].classList.add(disBlock);
-    } else {
-      changeSlide();
-    }
-
-    var refresh = function () {
-      console.log("refresh");
-      getData.getScreenId();
-    }
-
-    window.setInterval(refresh, 120000);
-
-
-  },
-
   addToDom: function () {
     console.log("addtodom");
     var slideFrame = document.querySelector('.slider');
     htmlData.forEach(function(data) {
       slideFrame.appendChild(data.html);
     });
-    createElement.setTimeouts();
+    setTimeouts();
   },
 
   createSlides: function () {

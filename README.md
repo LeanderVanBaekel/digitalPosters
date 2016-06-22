@@ -1,30 +1,66 @@
-# DIGITALPOSTERS designbrief
+# DIGITALPOSTERS
 
 ## Inleiding
 
 Voor de meesterproef van de minor Everything Web heb ik de opdracht Digital Posters gekozen. Dit ga ik doen in opdracht voor Mattijs Blekemolen.
 
-## Context - Stakeholders
+## Het probleem
 
-### Users
-Gebruikers van de digitale posters. Dit is iedereen die langs de schermen gaat lopen. De gebruikers willen het leuk vinden om naar de schermen te kijken en evetueel gestimuleerd worden om een actie uit te voeren.
+De posterframes die in de gangen bij CMD hangen worden graag gebruikt. Te graag. Daarom moet er een oplossing komen waardoor er beter en makkelijker op deze vraag ingespeeld kan worden.
 
-### Secondary users
-Iedereen die toegang krijgt tot de backend van het systeem. Dit zijn leraren en IamCore. Deze groep gaat slides uploaden aan de schermen en kan instellingen aanpassen. Niet idereen mag alle functies kunnen gebruiken.
+## Mijn oplossing
+
+Digitale posterframes met een slideshow van digitale content. Daarbij een CMS waarin de content beheerd kan worden.
+
+## User stories
+
+1.	Toon een aantrekkelijke carousel met (digitale) informatie posters in de 2 schermen op de gang.2.	Maak een web based systeem waarmee eenvoudig posters kunnen worden geupload, in een bepaalde volgorde kunnen worden gezet en voor een bepaalde tijd kunnen worden getoond.
+
+# De Applicatie
+
+De applicatie is geschreven in Node.js met een [Express server](https://www.npmjs.com/package/express). Deze regelt de server en de routing. Als template engine heb ik gekozen voor [EJS](https://www.npmjs.com/package/ejs). Dit is een robuste combinatie die veel gebruikt wordt en waar veel/goede ondersteuning voor is. Voor het database heb ik gekozen voor [MongoDB](https://mongodb.com). Ik heb hiervoor gekozen omdat Mongo flexibeler is dan de grote tegenhanger MySQL, dit komt goed van pas tijdens dit project omdat nog niet alle features vanaf het begin goed op papier staan.
+
+## Opstarten
+
+Om de applicatie lokaal te starten moet je eerst zorgen dat er een MongoDB server draait. Daarna ga je naar de applicatie map en voer je het commando
+```
+sudo npm install 
+```
+en  
+```
+node server.js
+```
+uit.
+
+## Het CMS
+
+Voor het beheren van de schermen, slideshows en slides is een Content Management System nodig. Deze is te bereiken op [/dps](http://screens.leandervanbaekel.nl/dps) (hiervoor moet je inloggen naam: mathijs, wachtwoord: 123). 
+
+Hier zijn de volgende functies te vinden:
+
+- Slides beheren
+- slide toevoegen
+- slideshows beheren
+- slideshow toevoegen
+- Schermen beheren
+- scherm toevoegen
+
+## De schermen
+
+De schermen zijn te bereiken op /dpf/[scherm nummer uit cms]. Bijvoorbeeld: [/dpf/1](http://screens.leandervanbaekel.nl/dpf/1). Hier worden automatisch de slides getoont van de slideshow die gekopelt is aan het scherm nummer. Deze data wordt opgehaald via de link [/dpf/api/1](http://screens.leandervanbaekel.nl/dpf/api/1) waarbij de '1' weer het scherm nummer is.
 
 
-### Client
-Mattijs Blekemolen. Mattijs wil een prototype hebben die hij kan voorleggen bij de bestuur van de opleiding zodat hij de financiering kan krijgen voor de schermen. Het prototype moet bewijzen dat het idee haalbaar is en dat de gebruikers er gebruik van gaan maken.
 
-## The environment of the product
-De schermen gaan in de eerste instantie in de gang van het tth op de eerste verdieping hangen.
 
-## Problem
 
-## Design challenge
 
-## Product vision
 
-## Milestones
 
-## Roadmap
+
+
+
+
+
+
+
+

@@ -1,13 +1,15 @@
+// Mongoose Schema for adding a screen to MongoDB
+
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
 var screens  = new Schema({
-  sid: Number,
-	name: String,
-	location: String,
-  slideshow: Number,
-  createdOn : Date,
-  createdBy : String
+  sid: Number, // screen id
+	name: String, // screen name
+	location: String, // location of the screen
+  slideshow: Number, // slideshow id connected to the screen
+  createdOn : Date, // date of creation of the screen
+  createdBy : String // name of the creator
 
 });
 

@@ -122,7 +122,7 @@ router.route('/add-slideshow')
 				},
 				redirect: function () {
 
-					res.redirect('slideshows');
+					res.redirect('/dps/slideshows');
 				}
 			};
 			createSlideshow.getNewId();
