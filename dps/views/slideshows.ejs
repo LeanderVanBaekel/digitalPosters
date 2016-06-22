@@ -9,9 +9,9 @@
     <li>
       <ul class="item-ul">
         <li></li>
-        <li>SID: <%= slideshow.sid%></li>
+        <!-- <li>SID: <%= slideshow.sid%></li> -->
         <li>Name: <%= slideshow.name%></li>
-        <li>contains: <%= slideshow.slides.length %></li>
+        <li>contains: <%= slideshow.slides.length %> slides</li>
         <li>Date created: <%= slideshow.createdOn.toLocaleDateString()%></li>
         <li><a href="<%= 'slideshows/edit/' + slideshow.sid %>" class="button" id="edit">EDIT</a><a href="<%= 'slideshows/remove/' + slideshow.sid %>" class="button" id="remove">REMOVE</a></li>
       </ul>

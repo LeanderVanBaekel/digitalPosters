@@ -283,3 +283,13 @@ a {
 .edit-slideshow-button {
   margin-bottom: 6em !important;
 }
+
+
+
+.screenImg {
+  background-color: lime;
+}
+
+.screenImg img {
+  height: 2em;
+}

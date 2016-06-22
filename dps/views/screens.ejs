@@ -1,6 +1,6 @@
 <%- include('partials/head')%>
 
-<!-- <a href="add-screen"><button class="button" id="addScreen">NEW SCREEN</button></a> -->
+<a href="/dps/screens/add-screen"><button class="button" id="addScreen">NEW SCREEN</button></a>
 
 
 <ul class="main-ul">
@@ -9,13 +9,13 @@
       <li>
         <ul class="item-ul">
           <li></li>
-          <li>SID: <%= screen.sid%></li>
+          <!-- <li>SID: <%= screen.sid%></li> -->
           <li>Name: <%= screen.name%></li>
-          <li>slideshow Sid: <%= screen.slideshow %></li>
+          <li>slideshow: <%= screen.slideshow %></li>
           <li>Date created: <%= screen.createdOn.toLocaleDateString()%></li>
           <li>
             <a href="<%= 'screens/edit/' + screen.sid %>" class="button" id="edit">EDIT</a>
-            <!-- <a href="<%= 'screens/remove/' + screen.sid %>" class="button" id="remove">REMOVE</a> -->
+            <a href="<%= 'screens/remove/' + screen.sid %>" class="button" id="remove">REMOVE</a>
           </li>
         </ul>
       </li>
@@ -23,6 +23,9 @@
   <% }; %>
 </ul>
 
+<!-- <div class="screenImg">
+  <img src="/images/poster1.png" alt="">
+</div> -->
 
 
 
