@@ -7,15 +7,14 @@ function pegasus(a,b){return b=new XMLHttpRequest,b.open("GET",a),a=[],b.onready
 var newData = {};
 var data = {};
 var htmlData = [];
-// var curSlide = 0;
-// var oldSlide = null;
+var update = false;
 
 var refresh = function () {
   console.log("refresh");
-  getData.getScreenId();
+  document.location.reload();
 }
 
-// window.setInterval(refresh, 60000);
+window.setInterval(refresh, 150000);
 
 // object to create url and send requests
 var getData = {
@@ -36,17 +35,8 @@ var getData = {
     console.log("dorequest");
     this.url.then(
       function (reqData, xhr) {
-        console.log(reqData);
-        newData = reqData;
-        if (newData == data) {
-          return;
-        } else {
-          data = newData;
-          var slider = document.querySelector('.slider');
-
-          slider.innerHTML = "";
-          createElement.createSlides();
-        }
+        data = reqData;
+        createElement.createSlides();
       },
       function(data, xhr) {
         console.error(reqData, xhr.status)
@@ -62,6 +52,7 @@ var setTimeouts = function () {
   var video;
   var curSlide = 0;
   var oldSlide = null;
+  update = false;
 
   var slides = document.querySelectorAll('.slide');
 
@@ -98,7 +89,9 @@ var setTimeouts = function () {
       curSlide = 0;
     }
 
-    window.setTimeout(changeSlide, duration);
+    if (update == false){
+      window.setTimeout(changeSlide, duration);
+    }
   };
 
   if (slides.length == 1) {
