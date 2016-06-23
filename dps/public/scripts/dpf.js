@@ -7,7 +7,6 @@ function pegasus(a,b){return b=new XMLHttpRequest,b.open("GET",a),a=[],b.onready
 var newData = {};
 var data = {};
 var htmlData = [];
-var update = false;
 
 var refresh = function () {
   console.log("refresh");
@@ -36,6 +35,7 @@ var getData = {
     this.url.then(
       function (reqData, xhr) {
         data = reqData;
+        newDdata = reqData;
         createElement.createSlides();
       },
       function(data, xhr) {
@@ -52,7 +52,6 @@ var setTimeouts = function () {
   var video;
   var curSlide = 0;
   var oldSlide = null;
-  update = false;
 
   var slides = document.querySelectorAll('.slide');
 
@@ -89,9 +88,7 @@ var setTimeouts = function () {
       curSlide = 0;
     }
 
-    if (update == false){
       window.setTimeout(changeSlide, duration);
-    }
   };
 
   if (slides.length == 1) {
