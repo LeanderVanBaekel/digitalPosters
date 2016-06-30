@@ -93,15 +93,17 @@ a {
 
 .main-ul {
   width: 100%;
-  margin-bottom: 4.5em;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .main-ul > li {
-  max-width: 50em;
-  margin: 0 auto;
+  width: 10em;
 }
 
-.main-ul > li:nth-child(odd) {
+
+/*.main-ul > li:nth-child(odd) {
   background-color: rgb(220,220,220);
 }
 
@@ -110,7 +112,7 @@ a {
   xborder-left: solid 2px rgb(230,230,230);
   xborder-right: solid 2px rgb(230,230,230);
   box-sizing: border-box;
-}
+}*/
 
 .li-title {
   background-color: #FFCC00!important;
