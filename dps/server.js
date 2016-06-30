@@ -48,7 +48,7 @@ app.use(multer({dest:'./uploads/'}).single('fileToUpload'));
 
 app.get('/', function(req, res, next){
   if (req.session.username) {
-    res.send("test");
+    res.redirect("/dps");
   } else {
 		res.redirect("/dps/login");
 	}
