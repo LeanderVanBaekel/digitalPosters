@@ -5,7 +5,6 @@
 
 
 <ul class="main-ul">
-  <li class="li-title"><h2>image slides</h2></li>
   <% data.slides.forEach(function(slide) { %>
     <% if (slide.contentType == "image") {%>
       <li>
@@ -24,7 +23,6 @@
       </li>
     <% }; %>
   <% }); %>
-  <li class="li-title"><h2>video slides</h2></li>
   <% data.slides.forEach(function(slide) { %>
     <% if (slide.contentType == "video") {%>
       <li>
@@ -43,7 +41,6 @@
       </li>
     <% }; %>
   <% }); %>
-  <li class="li-title"><h2>text slides</h2></li>
   <% data.slides.forEach(function(slide) { %>
     <% if (slide.contentType == "text") {%>
       <li>
