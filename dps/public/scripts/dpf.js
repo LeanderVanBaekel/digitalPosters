@@ -106,6 +106,7 @@ var createElement = {
     console.log("addtodom");
     var slideFrame = document.querySelector('.slider');
     htmlData.forEach(function(data) {
+      console.log("nu");
       slideFrame.appendChild(data.html);
     });
     setTimeouts();

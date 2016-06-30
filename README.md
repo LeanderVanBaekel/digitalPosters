@@ -12,6 +12,10 @@ De posterframes die in de gangen bij CMD hangen worden graag gebruikt. Te graag.
 
 Digitale posterframes met een slideshow van digitale content. Daarbij een CMS waarin de content beheerd kan worden.
 
+Het prototype is hier te vinden:
+
+[screens.leandervanbaekel.nl](screens.leandervanbaekel.nl)
+
 ## User stories
 
 1.	Toon een aantrekkelijke carousel met (digitale) informatie posters in de 2 schermen op de gang.2.	Maak een web based systeem waarmee eenvoudig posters kunnen worden geupload, in een bepaalde volgorde kunnen worden gezet en voor een bepaalde tijd kunnen worden getoond.
