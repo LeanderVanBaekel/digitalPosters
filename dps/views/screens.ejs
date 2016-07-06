@@ -1,26 +1,22 @@
 <%- include('partials/head')%>
 
-<a href="/dps/screens/add-screen"><button class="button" id="addScreen">NEW SCREEN</button></a>
+<!-- <a href="/dps/screens/add-screen"><button class="button" id="addScreen">NEW SCREEN</button></a> -->
 
 
 <ul class="main-ul">
-  <% if (data.screens) { %>
-    <% data.screens.forEach(function(screen) { %>
+  <% data.screens.forEach(function(screen) { %>
       <li>
-        <ul class="item-ul">
-          <li></li>
-          <!-- <li>SID: <%= screen.sid%></li> -->
-          <li>Name: <%= screen.name%></li>
-          <li>slideshow: <%= screen.slideshow %></li>
-          <li>Date created: <%= screen.createdOn.toLocaleDateString()%></li>
+        <ul class="item-ul screensUl">
+          <li><h2><%= screen.name %></h2></li>
+          <li><%= screen.location %></li>
+          <li class="tumb-img" style="background-image: url('/<%= screen.image %>');"></li>
           <li>
-            <a href="<%= 'screens/edit/' + screen.sid %>" class="button" id="edit">EDIT</a>
-            <a href="<%= 'screens/remove/' + screen.sid %>" class="button" id="remove">REMOVE</a>
+            <a href="/dps/edit/<%= screen.sid %>" class="button" id="edit">EDIT</a>
+            <!-- <a href="" class="button" id="remove">REMOVE</a> -->
           </li>
         </ul>
       </li>
     <% }); %>
-  <% }; %>
 </ul>
 
 <!-- <div class="screenImg">

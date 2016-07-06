@@ -124,5 +124,12 @@
     }
   };
 
+  var refresh = {
+    go: function () {
+      document.location.reload();
+    }
+  };
+
+  window.setInterval(refresh.go, 150000);
   getData.getScreenId();
 })();

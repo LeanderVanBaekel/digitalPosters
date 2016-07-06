@@ -1,5 +1,31 @@
 # DIGITALPOSTERS
 
+
+### [screens.leandervanbaekel.nl](screens.leandervanbaekel.nl)
+
+
+# Herkansing
+
+## Issues
+
+### [Readme aanpassen](https://github.com/LeanderVanBaekel/digitalPosters/issues/16)  
+
+
+### [Readme aanpassen part 2](https://github.com/LeanderVanBaekel/digitalPosters/issues/12)  
+
+Link geplaatst
+
+### [UI verbeteren](https://github.com/LeanderVanBaekel/digitalPosters/issues/15)  
+
+Oude interface
+![oude ui](readme-img/ui-1.png)
+
+Nieuwe interface
+![nieuwe ui](readme-img/ui-2.png)
+
+### [HTML verbeteren](https://github.com/LeanderVanBaekel/digitalPosters/issues/14)  
+### [Client side JS aanpassen](https://github.com/LeanderVanBaekel/digitalPosters/issues/13)  
+
 ## Inleiding
 
 Voor de meesterproef van de minor Everything Web heb ik de opdracht Digital Posters gekozen. Dit ga ik doen in opdracht voor Mattijs Blekemolen.

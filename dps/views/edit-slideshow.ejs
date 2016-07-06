@@ -2,14 +2,11 @@
 
 <form class="add-content" action="/dps/slideshows/edit/<%= data.sid %>" method="post">
 
-  <label for="name">Name: </label>
-  <input type="text" name="name" value="<%= data.slideshow.name%>" id="name" disabled="true"> <br>
-
   <label class="dis-none" for="slides">Slides: </label>
   <input type="text" class="dis-none" name="slides" value="<%= data.slideshow.slides%>" id="slides"> <br>
 
   <ul class="main-ul edit-slideshow-ul">
-    <li class="li-title"><h2>Slides in slideshow</h2></li>
+    <!-- <li class="li-title"><h2>Slides in slideshow</h2></li> -->
       <% data.usedSlides.forEach(function(slide){ %>
         <li>
           <ul class="item-ul">
@@ -18,7 +15,6 @@
             <!-- <li>SID: <%= slide.sid%></li> -->
             <li class="title"><%= slide.title%></li>
             <li>Duration: <%= slide.duration%></li>
-            <li>Date upload: <%= slide.createdOn.toLocaleDateString()%></li>
             <li>Remove from slideshow: <input type="checkbox" name="remove" value="<%= slide.sid %>"></li>
           </ul>
         </li>
@@ -28,23 +24,23 @@
 
 
   <ul class="main-ul edit-slideshow-ul">
-    <li class="li-title"><h2>image slides</h2></li>
+    <!-- <li class="li-title"><h2>image slides</h2></li> -->
     <% data.allSlides.forEach(function(slide) { %>
       <% if (slide.contentType == "image") {%>
         <li>
           <ul class="item-ul">
             <!-- <li><img src="<%= slide.content %>" alt="title"></li> -->
-            <li style="background-image: url('<%= slide.content %>');"></li>
+            <li style="background-image: url('/images/poster1.png');"></li>
             <!-- <li>SID: <%= slide.sid%></li> -->
             <li class="title"><%= slide.title%></li>
             <li>Duration: <%= slide.duration%></li>
-            <li>Date upload: <%= slide.createdOn.toLocaleDateString()%></li>
+            <li>type: image</li>
             <li>Add to slideshow: <input type="checkbox" name="add" value="<%= slide.sid %>"></li>
           </ul>
         </li>
       <% }; %>
     <% }); %>
-    <li class="li-title"><h2>video slides</h2></li>
+    <!-- <li class="li-title"><h2>video slides</h2></li> -->
     <% data.allSlides.forEach(function(slide) { %>
       <% if (slide.contentType == "video") {%>
         <li>
@@ -54,13 +50,13 @@
             <!-- <li>SID: <%= slide.sid%></li> -->
             <li class="title"><%= slide.title%></li>
             <li>Duration: <%= slide.duration%></li>
-            <li>Date upload: <%= slide.createdOn.toLocaleDateString()%></li>
+            <li>type: video</li>
             <li>Add to slideshow: <input type="checkbox" name="add" value="<%= slide.sid %>"></li>
           </ul>
         </li>
       <% }; %>
     <% }); %>
-    <li class="li-title"><h2>text slides</h2></li>
+    <!-- <li class="li-title"><h2>text slides</h2></li> -->
     <% data.allSlides.forEach(function(slide) { %>
       <% if (slide.contentType == "text") {%>
         <li>
@@ -70,7 +66,7 @@
             <!-- <li>SID: <%= slide.sid%></li> -->
             <li class="title"><%= slide.title%></li>
             <li>Duration: <%= slide.duration%></li>
-            <li>Date upload: <%= slide.createdOn.toLocaleDateString()%></li>
+            <li>type: text</li>
             <li>Add to slideshow: <input type="checkbox" name="add" value="<%= slide.sid %>"></li>
           </ul>
         </li>
