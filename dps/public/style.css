@@ -25,6 +25,10 @@ header h1 {
   margin-top: 0;
 }
 
+header a:hover {
+  color: blue;
+}
+
 .home {
   max-width: 25em;
   margin: 0 auto;
