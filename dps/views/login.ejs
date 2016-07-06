@@ -1,12 +1,16 @@
 <%- include('partials/head')%>
 
 <form class="add-content" action="login" method="post">
-  <label for="Username">Username: </label>
-  <input type="text" name="username" id="Username"><br>
-
-  <label for="password">Password: </label>
-  <input type="password" name="password" id="password"><br>
-
+  <legend>login</legend>
+  <div class="putin">
+    <label for="Username">Username: </label>
+    <input type="text" name="username" id="Username"><br>
+  </div>
+  <div class="putin">
+    <label for="password">Password: </label>
+    <input type="password" name="password" id="password"><br>
+  </div>
+  
   <button class="button" name="login">Login</button>
 </form>
 

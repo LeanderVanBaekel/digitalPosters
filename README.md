@@ -5,66 +5,64 @@
 
 ###Links
 
-[screens.leandervanbaekel.nl](http://screens.leandervanbaekel.nl)
+[screens.leandervanbaekel.nl](http://screens.leandervanbaekel.nl)  
+Hier kun je het CMS van de schermen bekijken.  
 
-Hier kun je het CMS van de schermen bekijken.
-
-Login: joost
-wachtwoord: 123
--of-
-Login: koop
+Login: joost  
+wachtwoord: 123  
+-of-  
+Login: koop  
 wachtwoord: 123
 
 
 [screen 1 url](http://screens.leandervanbaekel.nl/dpf/0)  
-[screen 2 url](http://screens.leandervanbaekel.nl/dpf/1)
-
+[screen 2 url](http://screens.leandervanbaekel.nl/dpf/1)  
 Hier kun je de schermen bekijken
 
 
-
-[Poster](readme-img/eindposter.pdf)
+ 
+[Poster](readme-img/eindposter.pdf)  
 Hier is de poster die ik voor de presentatie heb gemaakt.
 
 
 
 ## Issues
 
-### [Readme aanpassen](https://github.com/LeanderVanBaekel/digitalPosters/issues/16)
+### [Readme aanpassen](https://github.com/LeanderVanBaekel/digitalPosters/issues/16)  
 
-Dat ben je nu aan het lezen ;)
+Dat ben je nu aan het lezen ;) 
 
 
-### [UI verbeteren](https://github.com/LeanderVanBaekel/digitalPosters/issues/15)
+### [UI verbeteren](https://github.com/LeanderVanBaekel/digitalPosters/issues/15)  
 
 #### Oude interface
-![oude ui](readme-img/ui-1.png)
+![oude ui](readme-img/ui-1.png)  
 ![oude ui](readme-img/ui-3.png)
 
 
 #### Nieuwe interface
-Het nieuwe interface maakt gebruikt van 'blokken' in plaats van de tabellen/lijsten. Dit is voor de gebruiker beter leesbaar. Zo zie je ook sneller de items los van elkaar inplaats van één brei aan content.
-![nieuwe ui](readme-img/ui-4.png)
-Het eerste scherm waar je op komt (na het inloggen) is een overzicht van de schermen die je kunt aanpassen.
+Het nieuwe interface maakt gebruik van 'blokken' in plaats van tabellen/lijsten. Dit is voor de gebruiker beter leesbaar. Zo zie je ook sneller de items los van elkaar in plaats van één brei aan content.  
+![nieuwe ui](readme-img/ui-4.png)  
+Het eerste scherm waar je op komt (na het inloggen) is een overzicht van de screens die je kunt aanpassen.  
 ![nieuwe ui](readme-img/ui-2.png)
-de content op het scherm is makkelijk aan te passen met de knoppen add en remove. Je kunt gemakkelijk een slide toevoegen met de knop rechtsboven of een voorbeeld zien van de slideshow.
+De content op het scherm is makkelijk aan te passen met de knoppen 'add' en 'remove'. Je kunt gemakkelijk een slide toevoegen met de knop 'add new slide' rechtsboven. Er is ook een knop om een voorbeeld zien van de slideshow.
 
 
-### [HTML verbeteren](https://github.com/LeanderVanBaekel/digitalPosters/issues/14)
+### [HTML verbeteren](https://github.com/LeanderVanBaekel/digitalPosters/issues/14)  
 
 In het formulier waar je slides kunt toevoegen zaten ```<br>``` elementen om het op te maken. Die zijn er nu uit gehaald zoals je [hier kunt zien](https://github.com/LeanderVanBaekel/digitalPosters/blob/master/dps/views/add-slide.ejs#L32).
 
 In de navigatie zat een button in een ```<a>``` element. Met de nieuwe layout heb ik de hele navigatie eruit gehaald waardoor dit probleem ook weg is.
 
-### [Client side JS aanpassen](https://github.com/LeanderVanBaekel/digitalPosters/issues/13)
+### [Client side JS aanpassen](https://github.com/LeanderVanBaekel/digitalPosters/issues/13)  
 
 #### Consistente structuur
 
-[De nieuwe javascript client code](https://github.com/LeanderVanBaekel/digitalPosters/blob/master/dps/public/scripts/dpf-new.js) is helemaal in objecten geschreven inplaats van voor de helft. Hierdoor is de code leesbaarder geworden.
+[De nieuwe javascript client code](https://github.com/LeanderVanBaekel/digitalPosters/blob/master/dps/public/scripts/dpf-new.js) is helemaal in objecten geschreven in plaats van voor de helft. Hierdoor is de leesbaarheid van de code verbeterd.
 
 #### Dry'er
 
-in [deze functie](https://github.com/LeanderVanBaekel/digitalPosters/blob/master/dps/public/scripts/dpf-new.js#L38) werd een hoop code herhaald.
+In [deze functie](https://github.com/LeanderVanBaekel/digitalPosters/blob/master/dps/public/scripts/dpf-new.js#L38) werd een hoop code herhaald. 
 
 ```javascript
 image: function (slide) {
@@ -112,10 +110,10 @@ image: function (slide) {
     var slide = slide;
     slide.html = container;
     htmlData.push(slide);
-  }
-```
+  } 
+``` 
 
-Ik heb deze nu zo geschreven dat alle code die hetzelfde is voor alle 3 de soorten slides niet 3 keer wordt herhaald in de functie. Hij zou technisch gezien nog kleiner kunnen met bijvoorbeeld een constructor functie. Maar omdat deze code alleen op dedicated machines draait en dit nu nog een prototype is waar nog dingen in de data kunnen veranderen leek mij dit geen goed idee.
+Ik heb deze nu zo geschreven dat alle code die hetzelfde is voor alle 3 de soorten slides niet herhaald in de functie. Hij zou technisch gezien nog kleiner kunnen met bijvoorbeeld een constructor functie. Maar omdat deze code alleen op dedicated machines draait en dit nu nog een prototype is waar nog dingen in de data kunnen veranderen leek mij dit geen goed idee.
 
 ```javascript
 var container = document.createElement("div");
@@ -141,19 +139,20 @@ if (slide.contentType == "image") {
 ```
 
 #### IIFE
-Omdat de code op een dedicated computer draait vond ik dat het niet zo heel veel verschil maakte. maar omdat het wel best-practice is heb ik de code in een [IIFE](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) gezet zodat de code niet buiten de bedoelde scope beschikbaar is.
 
-voorbeeld:
+De code draait op een dedicated computer. Hierdoor vind ik dat het niet zo belangrijk om te code af te schermen. Omdat het wel best-practice is heb ik het in een [IIFE](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) gezet zodat de code niet buiten de bedoelde scope beschikbaar is.
+
+Voorbeeld:  
 
 ```javascript
 (function () {
   'use strict';
-
+  
   //code
+  
+})();  
 
-})();
-
-```
+```  
 
 ## Inleiding
 
@@ -183,9 +182,9 @@ De applicatie is geschreven in Node.js met een [Express server](https://www.npmj
 
 Om de applicatie lokaal te starten moet je eerst zorgen dat er een MongoDB server draait. Daarna ga je naar de applicatie map en voer je het commando
 ```
-sudo npm install
+sudo npm install 
 ```
-en
+en  
 ```
 node server.js
 ```
@@ -193,7 +192,7 @@ uit.
 
 ## Het CMS
 
-Voor het beheren van de schermen, slideshows en slides is een Content Management System nodig. Deze is te bereiken op [/dps](http://screens.leandervanbaekel.nl/dps) (hiervoor moet je inloggen naam: mathijs, wachtwoord: 123).
+Voor het beheren van de schermen, slideshows en slides is een Content Management System nodig. Deze is te bereiken op [/dps](http://screens.leandervanbaekel.nl/dps) (hiervoor moet je inloggen naam: mathijs, wachtwoord: 123). 
 
 Hier zijn de volgende functies te vinden:
 
@@ -204,8 +203,20 @@ Hier zijn de volgende functies te vinden:
 
 ## De schermen
 
-<<<<<<< HEAD
 De schermen zijn te bereiken op /dpf/[scherm nummer uit cms]. Bijvoorbeeld: [/dpf/0](http://screens.leandervanbaekel.nl/dpf/0). Hier worden automatisch de slides getoont van de slideshow die gekopelt is aan het scherm nummer. Deze data wordt opgehaald via de link [/dpf/api/0](http://screens.leandervanbaekel.nl/dpf/api/0s) waarbij de '1' weer het scherm nummer is.
-=======
-De schermen zijn te bereiken op /dpf/[scherm nummer uit cms]. Bijvoorbeeld: [/dpf/0](http://screens.leandervanbaekel.nl/dpf/0). Hier worden automatisch de slides getoont van de slideshow die gekopelt is aan het scherm nummer. Deze data wordt opgehaald via de link [/dpf/api/0](http://screens.leandervanbaekel.nl/dpf/api/0) waarbij de '1' weer het scherm nummer is.
->>>>>>> origin/master
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
