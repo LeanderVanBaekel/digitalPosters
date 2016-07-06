@@ -17,9 +17,17 @@ var users = [
 		"p": "123"
 	},
 	{
-		"u": "matthijs",
+		"u": "mattijs",
 		"p": "123"
-	}
+	},
+  {
+    "u": "joost",
+    "p": "123"
+  },
+  {
+    "u": "koop",
+    "p": "123"
+  }
 ];
 
 router.route('/')
@@ -88,6 +96,15 @@ router.route('/edit/:sid')
             Slides.find({sid: {$in:data.screen.slides}}, function (err,usedSlides) {
               if (err){return console.error(err);}
               data.usedSlides = usedSlides;
+
+              for (var i = 0; i < data.usedSlides.length; i++) {
+                for (var e = 0; e < data.slides.length; e++) {
+                  if (data.slides[e].sid == data.usedSlides[i].sid) {
+                    data.slides.splice(e, 1);
+                  }
+                }
+              }
+
               res.render('./edit-screen', {data:data});
             });
           } else {
@@ -245,7 +262,6 @@ router.route('/edit/:id/add/:sid')
 
       var index = data.screen.slides.indexOf(data.sid);
       if (index > -1) {
-        console.log("Test");
         res.redirect('/dps/edit/' + data.screenId);
       } else {
         data.screen.slides.push(data.sid);
