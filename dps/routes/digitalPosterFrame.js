@@ -24,19 +24,11 @@ router.route('/:sid')
 			if (err){ return console.error(err); }
 			data.screen = screen;
 
-			// search for slideshow data of the screen
-			var query = Slideshow.findOne({sid: data.screen.slideshow});
-			query.exec(function(err, slideshow){
-				if (err){ return console.error(err);}
-
-				data.slideshow = slideshow;
-
-				// search for al the slides in the slideshow
-				Slide.find({ sid : { $in : data.slideshow.slides}}, function (err, slides) {
-					if (err) {return console.error(err);}
-					data.slides = slides;
-					res.render('./dpf.ejs', {data: data});
-				});
+			// search for al the slides in the slideshow
+			Slide.find({ sid : { $in : data.screen.slides}}, function (err, slides) {
+				if (err) {return console.error(err);}
+				data.slides = slides;
+				res.render('./dpf.ejs', {data: data});
 			});
 		});
 	});
@@ -54,17 +46,10 @@ router.route('/api/:sid')
 
 			data.screen = screen;
 
-			var query = Slideshow.findOne({sid: data.screen.slideshow});
-			query.exec(function(err, slideshow){
-				if (err){ return console.error(err);}
-
-				data.slideshow = slideshow;
-
-				Slide.find({ sid : { $in : data.slideshow.slides}}, function (err, slides) {
-					if (err) {return console.error(err);}
-					data.slides = slides;
-					res.json(data);
-				});
+			Slide.find({ sid : { $in : data.screen.slides}}, function (err, slides) {
+				if (err) {return console.error(err);}
+				data.slides = slides;
+				res.json(data);
 			});
 		});
 	});

@@ -9,7 +9,7 @@ var multer  = require('multer');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 
-mongoose.connect('mongodb://127.0.0.1:27017/dpserver');
+mongoose.connect('mongodb://127.0.0.1:27017/dpserverV2');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -60,14 +60,14 @@ app.get('/', function(req, res, next){
 var dpfRouter = require('./routes/digitalPosterFrame');
 app.use('/dpf', dpfRouter);
 
-var dpsRouter = require('./routes/digitalPrintShop');
+var dpsRouter = require('./newRoutes/digitalPrintShop');
 app.use('/dps', dpsRouter);
 
-var screensRouter = require('./routes/dpsScreens');
-app.use('/dps/screens', screensRouter);
-
-var dpsSlideshowsRouter = require('./routes/dpsSlideshows');
-app.use('/dps/slideshows', dpsSlideshowsRouter);
+// var screensRouter = require('./newRoutes/dpsScreens');
+// app.use('/dps/screens', screensRouter);
+//
+// var dpsSlideshowsRouter = require('./newRoutes/dpsSlideshows');
+// app.use('/dps/slideshows', dpsSlideshowsRouter);
 
 var port = process.env.PORT || 8080;        // set our port
 

@@ -53,23 +53,21 @@ router.route('/edit/:sid')
 
 			data.screenData = screenData;
 			data.title = data.title + " " + screenData.name;
-			var query = Slideshow.find({}, function (err, slideshowData) {
-				if (err){return console.error(err);}
+			Slideshow.findOne({sid: sid}, function(err, slideshow) {
+				data.slideshow = slideshow;
+				Slide.find({}, function (err, slides) {
+					if (err){return console.error(err);}
+					data.allSlides = slides;
 
-				data.slideshows = slideshowData;
+					Slide.find({sid: {$in:data.slideshow.slides}}, function (err,usedSlides) {
+						if (err){return console.error(err);}
+						data.usedSlides = usedSlides;
+						res.render('./edit-slideshow', {data:data});
+					});
 
-				for (var i = 0; i < data.slideshows.length; i++) {
-					console.log(data.slideshows[i].sid +" "+ data.screenData.slideshow);
-					if (data.slideshows[i].sid == data.screenData.slideshow ) {
-						data.currentSlideshow = data.slideshows[i];
-						slideshowData.splice(i, 1);
-					}
-				}
-				if (data.screenData.slideshow == 0) {
-					data.currentSlideshow = {sid:0,name: 'No slideshow', location: undefined};
-				}
-				return res.render('./edit-screen.ejs', {data: data});
+				});
 			});
+				// return res.render('./edit-screen.ejs', {data: data});
 		});
 	});
 
