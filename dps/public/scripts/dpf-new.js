@@ -50,6 +50,7 @@
         } else if (slide.contentType == "video") {
           innerContainer.setAttribute('class', 'content-video');
           var newVideo = document.createElement("video");
+          newVideo.setAttribute('src', slide.content);
           innerContainer.appendChild(newVideo);
         } else {
           innerContainer.setAttribute('class', 'content-text');
