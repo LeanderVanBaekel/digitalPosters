@@ -58,7 +58,7 @@ app.get('/', function(req, res, next){
 var dpfRouter = require('./routes/digitalPosterFrame');
 app.use('/dpf', dpfRouter);
 
-var dpsRouter = require('./Routes/digitalPrintShop');
+var dpsRouter = require('./routes/digitalPrintShop');
 app.use('/dps', dpsRouter);
 
 
