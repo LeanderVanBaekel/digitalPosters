@@ -6,7 +6,6 @@ var url 				= 'mongodb://127.0.0.1:27017/dpserver';
 var mongoose   	= require('mongoose');
 var Slide 			= require('../models/slides.js');
 var Screen			= require('../models/screens.js');
-var Slideshow		= require('../models/slideshows.js');
 
 mongoose.createConnection(url);
 

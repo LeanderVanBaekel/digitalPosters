@@ -2,16 +2,13 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var MongoClient = require('mongodb');
-var url 				= 'mongodb://127.0.0.1:27017/dpserver';
+var url 				= 'mongodb://127.0.0.1:27017/dpserverV2';
 var mongoose   	= require('mongoose');
 var path = require('path');
-var Slide = require('../models/slides.js');
-var Slideshow = require('../models/slideshows.js');
-
+var Slides = require('../models/slides.js');
+var Screens = require('../models/screens.js');
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
-
-
 var filesPath = __dirname + "../public";
 
 var users = [
@@ -20,98 +17,106 @@ var users = [
 		"p": "123"
 	},
 	{
-		"u": "matthijs",
+		"u": "mattijs",
 		"p": "123"
-	}
+	},
+  {
+    "u": "joost",
+    "p": "123"
+  },
+  {
+    "u": "koop",
+    "p": "123"
+  }
 ];
 
 router.route('/')
 	.get(function(req, res, next) {
 		if (req.session.username) {
 			var data = {
-				title: "home"
+				title: "screens"
 			}
-			res.render("home.ejs", {data: data});
+
+      Screens.find({}, function(err, screenData) {
+        if (!screenData[0]) {
+          console.log("hoi");
+          var screen = Screens();
+          screen.sid = 0;
+          screen.name = "TTH 01";
+          screen.location = "1 verdieping oost";
+          screen.slides = [0];
+          screen.createdOn = new Date();
+          screen.createdBy = "Leander";
+          screen.image = "images/screen1.jpg";
+          screen.save(function (err) {
+            if(err) {console.error(err);};
+          });
+          var screen2 = Screens();
+          screen2.sid = 1;
+          screen2.name = "TTH 02";
+          screen2.location = "1 verdieping west";
+          screen2.slides = [0];
+          screen2.createdOn = new Date();
+          screen2.createdBy = "Leander";
+          screen2.image = "images/screen2.jpg";
+          screen2.save(function (err) {
+            if(err) {console.error(err);};
+
+            Screens.find({}, function(err, screenData) {
+              data.screens = screenData;
+              res.render("screens.ejs", {data: data});
+            });
+          });
+        } else {
+          data.screens = screenData;
+          res.render("screens.ejs", {data: data});
+        };
+      });
 		} else {
 			res.redirect("/dps/login");
-		}
+    }
 	});
 
-router.route('/login')
-	.get(function(req, res, next) {
-		if (req.session.username) {
-			res.redirect("/dps/");
-		} else {
-			var data = {
-				req: req,
-				title: "login"
-			};
-			res.render("login", {data:data});
-		}
-	});
+router.route('/edit/:sid')
+  .get(function (req, res, next) {
+    if (!req.session.username) { return res.redirect("/dps/login"); };
 
-router.route('/login')
-	.post(function (req, res, next) {
+    var data = {
+      req: req,
+      screen: req.params.sid
+    };
 
-		var username = req.body.username,
-			password = req.body.password;
-			console.log(username + " " + password);
+    Screens.findOne({sid: data.screen}, function(err, screen) {
+      data.screen = screen;
+        Slides.find({}, function (err, slides) {
+          if (err){return console.error(err);}
+          data.slides = slides;
 
-		for (var i = 0; i != users.length; i++) {
-			if (users[i].u == username && users[i].p == password) {
-				req.session.username = username;
-				res.redirect('/dps/');
-			}
-		}
-		if (!req.session.username) {
-			return res.redirect('/dps/login');
-		}
-	});
+          if (data.screen.slides) {
+            Slides.find({sid: {$in:data.screen.slides}}, function (err,usedSlides) {
+              if (err){return console.error(err);}
+              data.usedSlides = usedSlides;
 
+              for (var i = 0; i < data.usedSlides.length; i++) {
+                for (var e = 0; e < data.slides.length; e++) {
+                  if (data.slides[e].sid == data.usedSlides[i].sid) {
+                    data.slides.splice(e, 1);
+                  }
+                }
+              }
 
-// slide routes!!
+              res.render('./edit-screen', {data:data});
+            });
+          } else {
+            res.render('./edit-screen', {data:data});
+          }
+        });
 
-router.route('/slides')
-	.get(function(req, res, next) {
-		if (req.session.username) {
-			console.log('go to /slides');
+    });
 
-			var data = {
-				req: req,
-				title: "slides"
-			};
+    // res.render("edit-screen.ejs", {data: data});
+  });
 
-			var query = Slide.find().sort({date: -1});
-			query.exec(function(err, slideData){
-				if (err){
-					return console.error(err);
-				}
-				data.slides = slideData;
-
-				res.render('./slides.ejs', {data: data});
-			});
-		} else {
-			res.redirect('/dps/login');
-		}
-	});
-
-router.route('/slides/remove/:sid')
-	.get(function(req, res, next) {
-		if (req.session.username) {
-			var getSid = req.params.sid;
-			console.log(getSid);
-			console.log('Deleted a slide and route to /slide');
-			Slide.remove({ sid: getSid }, function (err) {
-				if (err){
-								console.log(err);
-							}
-  				console.log( getSid + " removed!");
-					res.redirect('/dps/slides');
-				});
-		} else {
-			res.redirect('/dps/login');
-		}
-	});
 
 
 router.route('/add-slide')
@@ -134,7 +139,7 @@ router.route('/add-slide', multer({ dest: './uploads/'}).single('fileToUpload'))
 		if (req.session.username) {
 			var createSlide = {
 				newSlideFunction: function (newId) {
-					var newSlide = Slide();
+					var newSlide = Slides();
 					newSlide.createdOn = new Date();
 					newSlide.createdBy = req.session.username;
 					newSlide.duration = req.body.duration;
@@ -176,7 +181,7 @@ router.route('/add-slide', multer({ dest: './uploads/'}).single('fileToUpload'))
 				},
 				getNewId: function () {
 					var newId = 0;
-					var query = Slide.find().sort({date: -1});
+					var query = Slides.find().sort({date: -1});
 					query.exec(function(err, slideData){
 						if (err){
 							console.log(err);
@@ -202,7 +207,7 @@ router.route('/add-slide', multer({ dest: './uploads/'}).single('fileToUpload'))
 				},
 				redirect: function () {
 
-					res.redirect('slides');
+					res.redirect('/dps');
 				}
 			};
 			createSlide.getNewId();
@@ -212,14 +217,111 @@ router.route('/add-slide', multer({ dest: './uploads/'}).single('fileToUpload'))
 		}
 	});
 
-router.route('/edit-slide/:id')
+router.route('/edit/:id/remove/:sid')
+	.get(function(req, res, next) {
+    if(!req.session.username) {
+      return res.redirect('/dps/login');
+    }
+
+    var data = {
+      screenId: req.params.id,
+  		sid: req.params.sid
+    };
+
+		Screens.findOne({ sid: data.screenId }, function (err, screen) {
+			if (err){ console.log(err); }
+
+      data.screen = screen;
+
+      var index = data.screen.slides.indexOf(data.sid);
+      if (index > -1) {
+        data.screen.slides.splice(index, 1);
+      }
+
+      Screens.update({sid: data.screenId}, {$set: {slides: data.screen.slides}}, function(err) {
+        res.redirect('/dps/edit/' + data.screenId);
+      });
+		});
+	});
+
+router.route('/edit/:id/add/:sid')
+	.get(function(req, res, next) {
+    if(!req.session.username) {
+      return res.redirect('/dps/login');
+    }
+
+    var data = {
+      screenId: req.params.id,
+  		sid: req.params.sid
+    };
+
+		Screens.findOne({ sid: data.screenId }, function (err, screen) {
+			if (err){ console.log(err); }
+
+      data.screen = screen;
+
+      var index = data.screen.slides.indexOf(data.sid);
+      if (index > -1) {
+        res.redirect('/dps/edit/' + data.screenId);
+      } else {
+        data.screen.slides.push(data.sid);
+        Screens.update({sid: data.screenId}, {$set: {slides: data.screen.slides}}, function(err) {
+          res.redirect('/dps/edit/' + data.screenId);
+        });
+      }
+		});
+	});
+
+router.route('/edit/:id/delete/:sid')
+	.get(function(req, res, next) {
+    if(!req.session.username) {
+      return res.redirect('/dps/login');
+    }
+
+    var screen = req.params.id;
+		var getSid = req.params.sid;
+		console.log(getSid);
+		console.log('Deleted a slide and route to /slide');
+		Slides.remove({ sid: getSid }, function (err) {
+			if (err){
+							console.log(err);
+						}
+			console.log( getSid + " removed!");
+			res.redirect('/dps/edit/' + screen);
+		});
+	});
+
+
+
+
+router.route('/login')
 	.get(function(req, res, next) {
 		if (req.session.username) {
-			var data = {};
-			console.log('go to /edit-slide');
-			res.render('./edit-slide', {data:data});
+			res.redirect("/dps/");
 		} else {
-			res.redirect('/dps/login');
+			var data = {
+				req: req,
+				title: "login"
+			};
+			res.render("login", {data:data});
+		}
+	});
+
+router.route('/login')
+	.post(function (req, res, next) {
+
+		var username = req.body.username,
+			password = req.body.password;
+			console.log(username + " " + password);
+
+		for (var i = 0; i != users.length; i++) {
+			if (users[i].u == username && users[i].p == password) {
+				req.session.username = username;
+				res.redirect('/dps/');
+			}
+		}
+		if (!req.session.username) {
+			return res.redirect('/dps/login');
 		}
 	});
 
@@ -236,14 +338,5 @@ router.route('/logout')
 		}
 	});
 
-//
-// router.get('/logout', function (req, res, next) {
-// 	 req.session.destroy(function (err) {
-// 		 if (req.session.username) {
-// 		 	console.log(err);
-// 	 } else {
-// 		 res.redirect('/dps/login');
-// 	 }
-// })
 
 module.exports = router;

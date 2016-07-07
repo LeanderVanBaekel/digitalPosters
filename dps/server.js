@@ -54,20 +54,13 @@ app.get('/', function(req, res, next){
 	}
 });
 
-// var sliderRouter = require('./routes/slider');
-// app.use('/slider', sliderRouter);
 
 var dpfRouter = require('./routes/digitalPosterFrame');
 app.use('/dpf', dpfRouter);
 
-var dpsRouter = require('./newRoutes/digitalPrintShop');
+var dpsRouter = require('./Routes/digitalPrintShop');
 app.use('/dps', dpsRouter);
 
-// var screensRouter = require('./newRoutes/dpsScreens');
-// app.use('/dps/screens', screensRouter);
-//
-// var dpsSlideshowsRouter = require('./newRoutes/dpsSlideshows');
-// app.use('/dps/slideshows', dpsSlideshowsRouter);
 
 var port = process.env.PORT || 8080;        // set our port
 

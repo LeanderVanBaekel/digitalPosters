@@ -206,9 +206,76 @@ Hier zijn de volgende functies te vinden:
 De schermen zijn te bereiken op /dpf/[scherm nummer uit cms]. Bijvoorbeeld: [/dpf/0](http://screens.leandervanbaekel.nl/dpf/0). Hier worden automatisch de slides getoont van de slideshow die gekopelt is aan het scherm nummer. Deze data wordt opgehaald via de link [/dpf/api/0](http://screens.leandervanbaekel.nl/dpf/api/0s) waarbij de '1' weer het scherm nummer is.
 
 
+## Koppeling met de vakken
+
+### Web app form scratch
+Voor het opzetten van dit project heb ik gebruik gemaakt van de technieken die we geleerd hebben tijdens WAFS. Ik heb bijvoorbeeld geleerd hoe je api's kunt aanspreken met XHR requests. Dit heb ik weer toegepast hier: 
+
+```javascript
+  var getData = {
+    baseUrl: 'http://146.185.182.221/dpf/api/',
+    url: '',
+    screenId: 0,
+    data: [],
+    getScreenId: function () {
+      var path = window.location.pathname.split("/");
+      this.screenId = path.pop();
+      this.makeRequest();
+    },
+    makeRequest: function () {
+      this.url = pegasus(this.baseUrl + this.screenId);
+      this.doReq();
+    },
+    doReq: function () {
+      this.url.then(
+        function (reqData, xhr) {
+          getData.data = reqData;
+          createElement.createHtml(getData.data);
+        },
+        function(data, xhr) {
+          console.error(reqData, xhr.status)
+        }
+      );
+    }
+  };
+```
+Dit is het getData object waarmee de Raspberry Pi de data van de slides opvraagd van de server. met de getScreenId en makeRequest functies maak ik de dynamische URL voor het opvragen van de data. DoReq voert de XHR request vervolgens uit met behulp van de micro lib [Pegasus](https://github.com/typicode/pegasus). 
 
 
+### CSS to the rescue
 
+Zonder CSS is de website wel bruikbaar maar niet mooi. Daarom heb ik de tips en trucs die we geleerd hebben bij CSS to the rescue toegepast in dit project. 
+
+Ik heb bijvoorbeeld formulier elementen gestyled:
+
+```
+.add-content input {
+  border: none;
+  border-bottom: 2px solid #FFCC00;
+  border-left: 2px solid #FFCC00;
+  font-size: 0.9em;
+}
+```
+Resultaat:  
+![formulier voorbeeld](readme-img/form.png)
+
+Ze zijn nog steeds bruikbaar maar passen nu beter in de style van rest van de site.
+
+### Performance Matters
+
+Performance matters dat is duidelijk. Niemand zit te wachten op langzaam ladende pagina's. Om dit te voorkomen heb ik er voor gezorgd dat de afbeeldingen die ik zelf toegevoegd heb zo klein mogelijk zijn. Verder heb ik alle CSS in een bestand gezet en alle javascript op ook. 
+
+In het CMS render ik alles serverside zodat ik niet afhankelijk ben van het apparaat van de gebruiker die de pagina bekijkt.
+
+### Browser Technologies
+
+Browser Technologies is een van de vakken die ik bij ongeveer elke regel code die schrijf in mijn achterhoofd heb zitten. Als ik hier een lijst wil weergeven, welk element kan ik dan het beste gebruiken? Het antwoord kwam dan meestal uit een van de wijze lessen van Krijn of Koop dat het ook bruikbaar moet zijn voor mensen met een handicap oid.
+
+Zo ben ik ook met de html begonnen voordat ik CSS toegepast heb. Hierdoor heb ik de data die in een lijst hoort ook echt in een lijst gezet in plaats van allemaal losse items (div's) maken.
+
+![voorbeeld lijst](readme-img/list.png)
+
+Ook werkt het hele CMS zonder javascript en wordt alles dus serverside geregeld waardoor de pagina's extreem snel en ligt zijn. (Helaas op de geuploade content na.)
 
 
 
